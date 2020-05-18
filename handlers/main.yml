@@ -1,0 +1,23 @@
+---
+# handlers file for lemp-stack
+
+- name: Restart the nginx service
+  service:
+       name: nginx
+       state: restarted
+       enabled: yes
+  listen: services restart
+
+- name: Restart the mariadb service
+  service:
+       name: mariadb
+       state: restarted
+       enabled: yes
+  listen: services restart
+
+- name: Restart the PHP FPM service
+  service:
+       name: php-fpm.service
+       state: restarted
+       enabled: yes
+  listen: services restart

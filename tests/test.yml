@@ -1,0 +1,8 @@
+---
+- hosts: centos
+  become: yes
+
+  tasks:
+     - name: Use lemp stack role
+       include_role:
+           name: /home/ansible/playbooks/lemp-stack

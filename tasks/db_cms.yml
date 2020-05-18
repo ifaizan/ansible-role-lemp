@@ -1,0 +1,15 @@
+---
+
+- name: Creating a user for cms
+  mysql_user:
+       name: cms_user
+       password: "{{ cms_user_pass }}"
+       priv: 'cms_db.*:ALL'
+       state: present
+       host: localhost
+
+- name: Create a new database for cms
+  mysql_db:
+       name: cms_db
+       state: present
+

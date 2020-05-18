@@ -1,0 +1,15 @@
+---
+
+- name: Enabling official nginx repo
+  yum_repository:
+       name: Nginx
+       description: nginx official repo
+       baseurl: https://nginx.org/packages/centos/7/$basearch
+       gpgcheck: no
+
+- name: Installation of nginx web server
+  yum:
+       name: nginx
+       state: latest
+  notify: services restart
+

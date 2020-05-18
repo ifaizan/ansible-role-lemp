@@ -1,0 +1,14 @@
+---
+# tasks file for lemp-stack
+
+- name: Deploying MariaDB
+  include_tasks: mariadb.yml
+
+- name: Deploying PHP 7
+  include_tasks: php.yml
+
+- name: Deploying nginx
+  include_tasks: nginx.yml
+
+- name: Creating database and user for cms
+  include_tasks: db_cms.yml

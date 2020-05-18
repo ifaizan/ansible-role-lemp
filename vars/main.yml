@@ -1,0 +1,15 @@
+---
+# vars file for lemp-stack
+
+mysql_root_password: "somerandom"
+cms_user_pass: "anotherrandom"
+
+mariadb_packages:
+  - mariadb-server
+  - MySQL-python
+
+php_packages:
+  - php
+  - php-mysqlnd
+  - php-fpm
+  - php-cli

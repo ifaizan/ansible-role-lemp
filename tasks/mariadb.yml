@@ -1,0 +1,43 @@
+---
+
+- name: MariaDB_10.3 official repository
+  yum_repository:
+       name: MariaDB
+       description: MariaDB_10.3
+       baseurl: http://yum.mariadb.org/10.3/centos7-amd64
+       gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+       gpgcheck: yes
+
+- name: Installation of mariadb and packages
+  yum: 
+       name: "{{ mariadb_packages }}" 
+       state: present
+
+- name: Starting and enabling the service
+  service:
+       name: mariadb
+       state: started
+       enabled: yes
+
+- name: Set root user password
+  mysql_user: 
+       name: root
+       password: "{{ mysql_root_password }}"
+       host_all: yes
+       login_unix_socket: /var/lib/mysql/mysql.sock
+       state: present
+  no_log: true
+
+- name: Copying .my.cnf file for idempotency 
+  template:
+       src: client.my.cnf.j2
+       dest: /root/.my.cnf
+       owner: root
+       group: root
+       mode: 0600
+  notify: services restart
+
+- name: Removing test database
+  mysql_db:
+       name: test
+       state: absent
